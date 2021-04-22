@@ -1,25 +1,43 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+// import Moves from './components/moves';
+import Board from './components/board';
+// import Table from './components/table';
+import Players from './components/players'
+import React from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      player1: "",
+      player2: ""
+    }
+  }
+
+  render() {
+
+    let setNames = (player1, player2) => {
+      if (player1 === "" || player2 === "") {
+        alert("Player Name Fields Cannot be Empty");
+      } else {
+        this.setState({ player1: player1, player2: player2 });
+      }
+    }
+    return (
+      <div className="game">
+        <Players getNames={setNames} />
+        <Board player1={this.state.player1} player2={this.state.player2} />
+        {/* <Table /> */}
+      </div>
+      // {/* <div className="moves">
+      //   <Moves />
+      // </div> */}
+      // </>
+    );
+  }
 }
 
 export default App;
